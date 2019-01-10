@@ -3,7 +3,7 @@ const { gql } = require('apollo-server')
 const typeDefs = gql`
     type Query {
         todos: [Todo]    
-        abc: String
+        doers: [Doer]
     }
     type Mutation {
         a(z: String): Todo
@@ -12,6 +12,9 @@ const typeDefs = gql`
     type Todo {
         title: String
         description: String
+    }
+    type Doer {
+      name: String
     }
     mutation AddTodo($type: String!) {
         addTodo(type: $type) {
