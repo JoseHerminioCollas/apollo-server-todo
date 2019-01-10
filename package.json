@@ -1,10 +1,11 @@
 {
-  "name": "Apollo Server Todo",
+  "name": "apollo-server-todo",
   "version": "1.0.0",
-  "description": "",
+  "description": "A repository to layout a Todo application with the Apollo framework.",
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "start": "nodemon src/index.js",
     "start:ci": "node src/index.js"
   },
@@ -30,8 +31,7 @@
   },
   "jest": {
     "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/__utils"
+      "/node_modules/"
     ]
   }
 }

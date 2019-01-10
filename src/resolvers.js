@@ -2,12 +2,7 @@ function Book(title, author) {
     this.title = title
     this.author = author
 }
-const books = [
-    {
-        title: 'Abc',
-        author: 'x yZ',
-    },
-];
+const books = [];
 function addBook(title = "No title", author = "No author") {
     const book = new Book(title, author)
     books.push(book)
