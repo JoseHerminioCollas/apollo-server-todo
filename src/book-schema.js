@@ -1,4 +1,5 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server')
+
 const typeDefs = gql`
     type Query {
         books: [Book]    
@@ -18,7 +19,7 @@ const typeDefs = gql`
         type
         }
     }
-`;
+`
 module.exports = typeDefs
 /*
   mutation ABC{
@@ -31,7 +32,7 @@ module.exports = typeDefs
   }
 }
 {
-  abc 
+  abc
 }
 mutation {
   a {
@@ -39,6 +40,6 @@ mutation {
   }
 }
 mutation {
-  b 
+  b
 }
 */
