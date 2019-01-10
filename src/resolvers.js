@@ -1,23 +1,24 @@
-function Book(title, author) {
+function Todo(title, description) {
   this.title = title
-  this.author = author
+  this.description = description
 }
-const books = []
-function addBook(title = 'No title', author = 'No author') {
-  const book = new Book(title, author)
-  books.push(book)
+const todos = []
+
+function addTodo(title = 'No title', description = 'No author') {
+  const todo = new Todo(title, description)
+  todos.push(todo)
 }
+
 const resolvers = {
   Query: {
-    books: () => books,
+    todos: () => todos,
     abc: () => 'abcxxxx',
   },
   Mutation: {
-    a: () => books[1],
+    a: () => todos[1],
     b: (_, { z = 'abc' }) => {
-      console.log(z)
-      addBook(z)
-      return books[books.length - 1].title
+      addTodo(z)
+      return todos[todos.length - 1].title
     },
   },
 }

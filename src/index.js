@@ -1,6 +1,6 @@
 const { ApolloServer } = require('apollo-server')
 const resolvers = require('./resolvers')
-const typeDefs = require('./book-schema')
+const typeDefs = require('./schema')
 const populate = require('./populate')
 
 populate()

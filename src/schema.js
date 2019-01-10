@@ -2,19 +2,19 @@ const { gql } = require('apollo-server')
 
 const typeDefs = gql`
     type Query {
-        books: [Book]    
+        todos: [Todo]    
         abc: String
     }
     type Mutation {
-        a(z: String): Book
+        a(z: String): Todo
         b(z: String): String
     }
-    type Book {
+    type Todo {
         title: String
-        author: String
+        description: String
     }
-    mutation AddBook($type: String!) {
-        addBook(type: $type) {
+    mutation AddTodo($type: String!) {
+        addTodo(type: $type) {
         id
         type
         }
