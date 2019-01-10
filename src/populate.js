@@ -1,7 +1,7 @@
 const resolvers = require('./resolvers')
 
 function populate() {
-  resolvers.Mutation.b(null, { z: 'xxxxxx' })
+  resolvers.Mutation.addTodo(null, { z: 'xxxxxx' })
 }
 
 module.exports = populate

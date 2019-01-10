@@ -4,10 +4,10 @@ const typeDefs = gql`
     type Query {
         todos: [Todo]    
         doers: [Doer]
+        me: Doer
     }
     type Mutation {
-        a(z: String): Todo
-        b(z: String): String
+        addTodo(z: String): String
     }
     type Todo {
         title: String
@@ -24,25 +24,3 @@ const typeDefs = gql`
     }
 `
 module.exports = typeDefs
-/*
-  mutation ABC{
-  b(z: "the next title")
-}
-{
-  books {
-    title
-    author
-  }
-}
-{
-  abc
-}
-mutation {
-  a {
-    title
-  }
-}
-mutation {
-  b
-}
-*/

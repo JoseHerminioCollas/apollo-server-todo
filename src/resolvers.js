@@ -13,18 +13,16 @@ function addTodo(title = 'No title', description = 'No author') {
   const todo = new Todo(title, description)
   todos.push(todo)
 }
-const me = {name: 'user'}
+const me = new Doer('me')
 
 const resolvers = {
   Query: {
     todos: () => todos,
     doers: () => doers,
-    me: async (_, __, { dataSources }) =>
-      me,
+    me: async (_, __, { z }) => me + z,
   },
   Mutation: {
-    a: () => todos[1],
-    b: (_, { z = 'abc' }) => {
+    addTodo: async (_, { z = 'abc' }) => {
       addTodo(z)
       return todos[todos.length - 1].title
     },
