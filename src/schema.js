@@ -8,6 +8,7 @@ const typeDefs = gql`
     }
     type Mutation {
         addTodo(z: String): String
+        addDoer(name: String): Doer
     }
     type Todo {
         title: String
