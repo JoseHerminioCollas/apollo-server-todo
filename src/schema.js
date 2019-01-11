@@ -7,7 +7,7 @@ const typeDefs = gql`
         me: Doer
     }
     type Mutation {
-        addTodo(z: String): String
+        addTodo(title: String description: String): Todo
         addDoer(name: String): Doer
     }
     type Todo {
@@ -16,12 +16,6 @@ const typeDefs = gql`
     }
     type Doer {
       name: String
-    }
-    mutation AddTodo($type: String!) {
-        addTodo(type: $type) {
-        id
-        type
-        }
     }
 `
 module.exports = typeDefs

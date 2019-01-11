@@ -2,11 +2,12 @@ const resolvers = require('../resolvers')
 
 describe('[Mutation.addTodo]', () => {
   it('add a Todo and return the Todo', async () => {
+    const expected = { title: 'title', description: 'description' }
     const res = await resolvers.Mutation.addTodo(
       null,
-      { z: 'xxx' },
+      expected,
     )
-    expect(res).toEqual('xxx')
+    expect(res).toEqual(expected)
   })
 })
 describe('[Mutation.addDoer]', () => {
