@@ -1,5 +1,6 @@
 // todo
 function Todo(title, description) {
+  this.ID = null
   this.title = title
   this.description = description
 }
@@ -9,31 +10,34 @@ function AddTodo(title = 'No title', description = 'No author') {
   todos.push(todo)
   return todo
 }
+function getTodos(_, { first }) {
+  return todos.slice(first)
+}
 
-// doer
 function Doer(name) {
   this.name = name
 }
-const Doers = {
-  doers: [],
-  add(name = 'No Name') {
-    const doer = new Doer(name)
-    this.doers.push(doer)
-    return doer
-  },
-}
-Doers.add('me')
+const doer = (() => {
+  const doers = [{ name: 'me' }]
+  return {
+    get: () => doers,
+    add(name) {
+      const d = new Doer(name)
+      doers.push(d)
+      return d
+    },
+  }
+})()
 const resolvers = {
   Query: {
-    todos: () => todos,
-    doers: () => Doers.doers,
-    me: async () => Doer.doers[0],
+    todos: getTodos,
+    doers: doer.get,
   },
   Mutation: {
     addTodo:
       async (_, { title = 'none', description = 'none' }) => AddTodo(title, description),
     addDoer:
-      async (_, { name = 'abc' }) => Doers.add(name),
+      async (_, { name = 'abc' }) => doer.add(name),
   },
 }
 
