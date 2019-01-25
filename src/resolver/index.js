@@ -1,4 +1,4 @@
-const doer = require('./resolver')
+const doer = require('./doer.js')
 
 // todo
 function Todo(title, description) {

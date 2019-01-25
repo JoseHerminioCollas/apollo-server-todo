@@ -1,6 +1,6 @@
 /* eslint no-console: "off" */
 const { ApolloServer } = require('apollo-server')
-const resolvers = require('./resolvers')
+const resolvers = require('./resolver')
 const typeDefs = require('./schema')
 const populate = require('./populate')
 
