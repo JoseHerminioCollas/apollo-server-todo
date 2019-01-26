@@ -12,8 +12,8 @@ function AddTodo(title = 'No title', description = 'No author') {
   todos.push(todo)
   return todo
 }
-function getTodos(_, { first }) {
-  return todos.slice(first)
+function getTodos(_, { first = 0, offset = 1 }) {
+  return todos.slice(first, first + offset)
 }
 const resolvers = {
   Query: {

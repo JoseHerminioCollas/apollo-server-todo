@@ -1,9 +1,7 @@
-const { gql } = require('apollo-server')
-
-const typeDefs = gql`
+const typeDefs = `
 type Query {
     todos(first: Int): [Todo]    
-    doers: [Doer]
+    doers(first: Int, offset: Int): [Doer]
     allTodos(
         first: Int,
         offset: Int

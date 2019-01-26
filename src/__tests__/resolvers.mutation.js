@@ -1,4 +1,4 @@
-const resolvers = require('../resolvers')
+const resolvers = require('../resolver')
 
 describe('[Mutation.addTodo]', () => {
   it('add a Todo and return the Todo', async () => {
@@ -7,7 +7,7 @@ describe('[Mutation.addTodo]', () => {
       null,
       expected,
     )
-    expect(res).toEqual(expected)
+    expect(res.title).toEqual(expected.title)
   })
 })
 describe('[Mutation.addDoer]', () => {
@@ -17,6 +17,6 @@ describe('[Mutation.addDoer]', () => {
       null,
       expected,
     )
-    expect(result).toEqual(expected)
+    expect(result.name).toEqual(expected.name)
   })
 })

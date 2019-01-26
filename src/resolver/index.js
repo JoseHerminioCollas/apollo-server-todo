@@ -6,13 +6,13 @@ function Todo(title, description) {
   this.title = title
   this.description = description
 }
-const todos = []
+const todos = [{ title: 'abc' }]
 function AddTodo(title = 'No title', description = 'No author') {
   const todo = new Todo(title, description)
   todos.push(todo)
   return todo
 }
-function getTodos(_, { first }) {
+function getTodos(_, { first = 0 }) {
   return todos.slice(first)
 }
 const resolvers = {
