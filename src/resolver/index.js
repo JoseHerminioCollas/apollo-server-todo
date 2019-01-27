@@ -6,7 +6,7 @@ function Todo(title, description) {
   this.title = title
   this.description = description
 }
-const todos = [{ title: 'abc' }]
+const todos = []
 function AddTodo(title = 'No title', description = 'No author') {
   const todo = new Todo(title, description)
   todos.push(todo)

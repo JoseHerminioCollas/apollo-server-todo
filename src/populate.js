@@ -1,4 +1,4 @@
-const resolvers = require('./resolvers')
+const resolvers = require('./resolver')
 
 function populate() {
   resolvers.Mutation.addTodo(null, { title: 'aaaaa' })
