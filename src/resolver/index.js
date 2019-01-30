@@ -15,6 +15,10 @@ function AddTodo(title = 'No title', description = 'No author') {
 function getTodos(_, { first = 0 }) {
   return todos.slice(first)
 }
+function clearTodoList() {
+  todos.splice(0)
+  return true
+}
 const resolvers = {
   Query: {
     todos: getTodos,
@@ -25,6 +29,7 @@ const resolvers = {
       async (_, { title = 'none', description = 'none' }) => AddTodo(title, description),
     addDoer:
       async (_, { name = 'abc' }) => doer.add(name),
+    clearTodoList,
   },
 }
 

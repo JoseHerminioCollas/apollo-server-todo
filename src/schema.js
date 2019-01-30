@@ -10,6 +10,7 @@ type Query {
 }
 type Mutation {
     addTodo(title: String description: String): Todo
+    clearTodoList: Boolean
     addDoer(name: String): Doer
 }
 type Todo {

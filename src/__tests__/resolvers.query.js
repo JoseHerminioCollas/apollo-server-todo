@@ -3,22 +3,23 @@ const { graphql, buildSchema } = require('graphql')
 const resolvers = require('../resolver')
 const schema = require('../schema')
 
+const executableSchema = buildSchema(schema)
+
 describe('Todos', () => {
   describe('Add and Retrieve Todos', () => {
     test('add a Todo and retrieves the Todo', async () => {
       const expectedTitle = 'abc'
-      const executablechema = buildSchema(schema)
-      const beforeState = await graphql(executablechema,
+      const beforeState = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
         { first: 0 })
 
-      await graphql(executablechema,
+      await graphql(executableSchema,
         'mutation { addTodo { title } }',
         resolvers.Mutation,
         { title: expectedTitle })
 
-      const afterState = await graphql(executablechema,
+      const afterState = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
         { first: 0 })
@@ -28,13 +29,32 @@ describe('Todos', () => {
       expect(afterState.data.todos[0].title).toBe(expectedTitle)
     })
     test('add five Todos and retrieve correct count of Todos', async () => {
+      const expectedTitleCount = 5
+      const titles = Array.from(new Array(expectedTitleCount)).map(() => Math.random())
+      async function addTodo(s, t = 'None') {
+        await graphql(s,
+          'mutation { addTodo { title } }',
+          resolvers.Mutation,
+          { title: `${t}` })
+      }
 
+      await graphql(executableSchema,
+        'mutation { clearTodoList }',
+        resolvers.Mutation)
+      const beforeState = await graphql(executableSchema,
+        'query { todos { title } }',
+        resolvers.Query,
+        { first: 0 })
+      await Promise.all(titles.map(t => addTodo(executableSchema, t)))
+        .catch(e => console.log('error: ', e))
+      const afterState = await graphql(executableSchema,
+        'query { todos { title } }',
+        resolvers.Query,
+        { first: 0 })
+
+      expect(titles.length).toBe(expectedTitleCount)
+      expect(beforeState.data.todos.length).toBe(0)
+      expect(afterState.data.todos.length).toBe(expectedTitleCount)
     })
   })
 })
-/*
-add todos
-add 5 todos
-0 5
-4 5
-*/
