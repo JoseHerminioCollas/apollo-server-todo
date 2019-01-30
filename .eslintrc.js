@@ -5,7 +5,7 @@ module.exports = {
     },
     "globals": {
         "describe": true,
-        "it": true,
-        "expect": true
+        "expect": true,
+	"test": true
     }
 };
