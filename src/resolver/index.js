@@ -1,35 +1,21 @@
-const doer = require('./doer.js')
+const doer = require('./doer')
+const todo = require('./todo')
 
-// todo
-function Todo(title, description) {
-  this.ID = null
-  this.title = title
-  this.description = description
-}
-const todos = []
-function AddTodo(title = 'No title', description = 'No author') {
-  const todo = new Todo(title, description)
-  todos.push(todo)
-  return todo
-}
-function getTodos(_, { first = 0 }) {
-  return todos.slice(first)
-}
-function clearTodoList() {
-  todos.splice(0)
-  return true
-}
 const resolvers = {
   Query: {
-    todos: getTodos,
+    todos: todo.get,
     doers: doer.get,
   },
   Mutation: {
     addTodo:
-      async (_, { title = 'none', description = 'none' }) => AddTodo(title, description),
+      async (
+        _,
+        { title = 'none', description = 'none' }) => todo.add(title, description),
     addDoer:
-      async (_, { name = 'abc' }) => doer.add(name),
-    clearTodoList,
+      async (
+        _,
+        { name = 'abc' }) => doer.add(name),
+    clearTodoList: todo.clearList,
   },
 }
 
