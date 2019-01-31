@@ -10,7 +10,7 @@ type Mutation {
     setTodoContent(id: String, title: String, description: String): Todo
     clearTodoList: Boolean
     addDoer(name: String): Doer
-    deleteDoer(id: String)
+    deleteDoer(id: String): Doer
 }
 type Todo {
     id: ID!
