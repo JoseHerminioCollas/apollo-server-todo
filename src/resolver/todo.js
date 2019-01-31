@@ -9,8 +9,8 @@ const todo = (function createTodo() {
     todos.push(new Todo(title, description))
     return todos[todos.length - 1]
   }
-  function get(_, { first = 0 }) {
-    return todos.slice(first)
+  function get(_, { first = 0, offset = 0 }) {
+    return todos.slice(first, first + offset)
   }
   function clearList() {
     todos.splice(0)

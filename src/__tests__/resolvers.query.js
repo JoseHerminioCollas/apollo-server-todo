@@ -22,7 +22,7 @@ describe('Todos', () => {
       const afterState = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
-        { first: 0 })
+        { first: 0, offset: 1 })
 
       expect(beforeState.data.todos.length).toBe(0)
       expect(afterState.data.todos.length).toBe(1)
@@ -41,20 +41,29 @@ describe('Todos', () => {
       await graphql(executableSchema,
         'mutation { clearTodoList }',
         resolvers.Mutation)
+
       const beforeState = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
-        { first: 0 })
+        { first: 0, offset: 3 })
+
       await Promise.all(titles.map(t => addTodo(executableSchema, t)))
         .catch(e => console.log('error: ', e))
+
       const afterState = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
-        { first: 0 })
+        { first: 0, offset: expectedTitleCount })
+
+      const afterStateB = await graphql(executableSchema,
+        'query { todos { title } }',
+        resolvers.Query,
+        { first: 0, offset: 3 })
 
       expect(titles.length).toBe(expectedTitleCount)
       expect(beforeState.data.todos.length).toBe(0)
       expect(afterState.data.todos.length).toBe(expectedTitleCount)
+      expect(afterStateB.data.todos.length).toBe(3)
     })
   })
 })

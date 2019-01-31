@@ -1,6 +1,6 @@
 const typeDefs = `
 type Query {
-    todos(first: Int): [Todo]    
+    todos(first: Int, offset: Int): [Todo]
     doers(first: Int, offset: Int): [Doer]
     allTodos(
         first: Int,
