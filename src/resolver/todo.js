@@ -1,13 +1,18 @@
-function Todo(title, description) {
-  this.ID = null
+function Todo(id, title, description) {
+  this.id = id
   this.title = title
   this.description = description
 }
 const todo = (function createTodo() {
   const todos = []
   function add(title, description = ' - ') {
-    todos.push(new Todo(title, description))
+    todos.push(new Todo(todos.length, title, description))
     return todos[todos.length - 1]
+  }
+  const deleteTodo = (id) => {
+    const tI = todos.findIndex(t => t.id === id)
+    todos.splice(tI, 1)
+    return true
   }
   function get(_, { first = 0, offset = 0 }) {
     return todos.slice(first, first + offset)
@@ -20,6 +25,7 @@ const todo = (function createTodo() {
     add,
     get,
     clearList,
+    deleteTodo,
   }
 }())
 
