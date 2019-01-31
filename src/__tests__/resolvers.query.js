@@ -6,7 +6,7 @@ const schema = require('../schema')
 const executableSchema = buildSchema(schema)
 
 describe('Todos', () => {
-  describe('Add and Retrieve Todos', () => {
+  describe('Query', () => {
     test('add a Todo and retrieves the Todo', async () => {
       const expectedTitle = 'abc'
       const beforeState = await graphql(executableSchema,
@@ -29,8 +29,10 @@ describe('Todos', () => {
       expect(afterState.data.todos[0].title).toBe(expectedTitle)
     })
     test('add five Todos and retrieve correct count of Todos', async () => {
-      const expectedTitleCount = 5
-      const titles = Array.from(new Array(expectedTitleCount)).map(() => Math.random())
+      const expectedCount = 5
+      const expectedCountB = 3
+      const expectedCountC = 2
+      const titles = Array.from(new Array(expectedCount)).map(() => Math.random())
       async function addTodo(s, t = 'None') {
         await graphql(s,
           'mutation { addTodo { title } }',
@@ -53,17 +55,23 @@ describe('Todos', () => {
       const afterState = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
-        { first: 0, offset: expectedTitleCount })
+        { first: 0, offset: expectedCount })
 
       const afterStateB = await graphql(executableSchema,
         'query { todos { title } }',
         resolvers.Query,
-        { first: 0, offset: 3 })
+        { first: 0, offset: expectedCountB })
 
-      expect(titles.length).toBe(expectedTitleCount)
+      const afterStateC = await graphql(executableSchema,
+        'query { todos { title } }',
+        resolvers.Query,
+        { first: 3, offset: 5 })
+
+      expect(titles.length).toBe(expectedCount)
       expect(beforeState.data.todos.length).toBe(0)
-      expect(afterState.data.todos.length).toBe(expectedTitleCount)
-      expect(afterStateB.data.todos.length).toBe(3)
+      expect(afterState.data.todos.length).toBe(expectedCount)
+      expect(afterStateB.data.todos.length).toBe(expectedCountB)
+      expect(afterStateC.data.todos.length).toBe(expectedCountC)
     })
   })
 })
