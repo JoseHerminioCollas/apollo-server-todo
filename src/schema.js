@@ -2,16 +2,15 @@ const typeDefs = `
 type Query {
     todos(first: Int, offset: Int): [Todo]
     doers(first: Int, offset: Int): [Doer]
-    allTodos(
-        first: Int,
-        offset: Int
-    ): TodosResult
-    me: Doer
 }
 type Mutation {
     addTodo(title: String description: String): Todo
+    deleteTodo(id: String): Boolean
+    setTodoComplete(id: String): Todo
+    setTodoContent(id: String, title: String, description: String): Todo
     clearTodoList: Boolean
     addDoer(name: String): Doer
+    deleteDoer(id: String)
 }
 type Todo {
     id: ID!
