@@ -1,3 +1,0 @@
-const doer = './doer.js'
-
-export { doer }
