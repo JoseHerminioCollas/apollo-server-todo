@@ -76,15 +76,32 @@ describe('Todos', () => {
 
     test('retrieve expected Doer from Todo', async () => {
       const expectedName = 'abc'
+      // clear
+      await graphql(executableSchema,
+        'mutation { clearTodoList }',
+        resolvers.Mutation)
+      // add doer
       await graphql(executableSchema,
         'mutation { addDoer { name }}',
         resolvers.Mutation,
         { name: expectedName })
+
       const doerA = await graphql(executableSchema,
         'query { doers { name } }',
         resolvers.Query)
+      // add todo
+      await graphql(executableSchema,
+        'mutation { addTodo { title } }',
+        resolvers.Mutation,
+        { title: 'x' })
+
+      const todoA = await graphql(executableSchema,
+        'query { todos {todos { title } } }',
+        resolvers.Query,
+        { first: 0 })
 
       expect(doerA.data.doers[0].name).toBe(expectedName)
+      expect(todoA.data.todos.todos.length).toBe(1)
     })
   })
 })

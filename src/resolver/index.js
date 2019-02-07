@@ -11,7 +11,7 @@ const resolvers = {
       async (
         _,
         { title = 'none', description = 'none' }) => todo.add(title, description),
-    addTodoDoer: async () => doer.get()[0],
+    addTodoDoer: async () => todo.addDoer('DDD'),
     addDoer:
       async (
         _,
