@@ -6,16 +6,19 @@ function Todo(id, title, description) {
 const todo = (function createTodo() {
   const todos = []
   function add(title, description = ' - ') {
-    todos.push(new Todo(todos.length, title, description))
-    return todos[todos.length - 1]
+    todos.unshift(new Todo(todos.length, title, description))
+    return todos[0]
   }
   const deleteTodo = (id) => {
     const tI = todos.findIndex(t => t.id === id)
     todos.splice(tI, 1)
     return true
   }
-  function get(_, { first = 0, offset = 0 }) {
-    return todos.slice(first, first + offset)
+  function get(_, { first = 0, offset = 2 }) {
+    return {
+      todos: todos.slice(first, first + offset),
+      totalCount: todos.length,
+    }
   }
   function clearList() {
     todos.splice(0)
