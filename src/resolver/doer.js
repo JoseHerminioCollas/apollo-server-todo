@@ -2,7 +2,7 @@ function Doer(name) {
   this.name = name
 }
 const doer = (() => {
-  const doers = [{ name: 'me' }]
+  const doers = []
   return {
     get: () => doers,
     add(name) {

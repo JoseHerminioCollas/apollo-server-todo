@@ -73,5 +73,18 @@ describe('Todos', () => {
       expect(afterStateB.data.todos.todos.length).toBe(expectedCountB)
       expect(afterStateC.data.todos.todos.length).toBe(expectedCountC)
     })
+
+    test('retrieve expected Doer from Todo', async () => {
+      const expectedName = 'abc'
+      await graphql(executableSchema,
+        'mutation { addDoer { name }}',
+        resolvers.Mutation,
+        { name: expectedName })
+      const doerA = await graphql(executableSchema,
+        'query { doers { name } }',
+        resolvers.Query)
+
+      expect(doerA.data.doers[0].name).toBe(expectedName)
+    })
   })
 })

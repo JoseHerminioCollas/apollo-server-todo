@@ -1,4 +1,4 @@
-const doer = require('./doer')
+const doer = require('./doer') // Doer
 const todo = require('./todo')
 
 const resolvers = {
@@ -11,6 +11,7 @@ const resolvers = {
       async (
         _,
         { title = 'none', description = 'none' }) => todo.add(title, description),
+    addTodoDoer: async () => doer.get()[0],
     addDoer:
       async (
         _,
