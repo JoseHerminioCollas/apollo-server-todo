@@ -9,7 +9,7 @@ describe('Todos', () => {
   describe('Mutation', () => {
     test('add a Todo', async () => {
       const beforeState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0 })
 
@@ -19,12 +19,12 @@ describe('Todos', () => {
         { title: 'xxxx' })
 
       const afterState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: 1 })
 
-      expect(beforeState.data.todos.length).toBe(0)
-      expect(afterState.data.todos.length).toBe(1)
+      expect(beforeState.data.todos.todos.length).toBe(0)
+      expect(afterState.data.todos.todos.length).toBe(1)
     })
     test('delete a Todo', async () => {
       await graphql(executableSchema,
@@ -37,7 +37,7 @@ describe('Todos', () => {
         { title: 'aaa', description: 'ddd' })
 
       const beforeState = await graphql(executableSchema,
-        'query { todos { title, id } }',
+        'query { todos { todos { title, id } } }',
         resolvers.Query,
         { first: 0, offset: 1 })
       await graphql(executableSchema,
@@ -46,12 +46,12 @@ describe('Todos', () => {
         { id: 0 })
 
       const afterState = await graphql(executableSchema,
-        'query { todos { title, id } }',
+        'query { todos { todos { title, id } } }',
         resolvers.Query,
         { first: 0, offset: 1 })
 
-      expect(beforeState.data.todos.length).toBe(1)
-      expect(afterState.data.todos.length).toBe(0)
+      expect(beforeState.data.todos.todos.length).toBe(1)
+      expect(afterState.data.todos.todos.length).toBe(0)
     })
     test('delete all Todos', async () => {
       await graphql(executableSchema,
@@ -64,7 +64,7 @@ describe('Todos', () => {
         { title: 'xxxx' })
 
       const beforeState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: 1 })
 
@@ -73,12 +73,12 @@ describe('Todos', () => {
         resolvers.Mutation)
 
       const afterState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: 1 })
 
-      expect(beforeState.data.todos.length).toBe(1)
-      expect(afterState.data.todos.length).toBe(0)
+      expect(beforeState.data.todos.todos.length).toBe(1)
+      expect(afterState.data.todos.todos.length).toBe(0)
     })
   })
 })

@@ -10,7 +10,7 @@ describe('Todos', () => {
     test('add a Todo and retrieves the Todo', async () => {
       const expectedTitle = 'abc'
       const beforeState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0 })
 
@@ -20,13 +20,13 @@ describe('Todos', () => {
         { title: expectedTitle })
 
       const afterState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: 1 })
 
-      expect(beforeState.data.todos.length).toBe(0)
-      expect(afterState.data.todos.length).toBe(1)
-      expect(afterState.data.todos[0].title).toBe(expectedTitle)
+      expect(beforeState.data.todos.todos.length).toBe(0)
+      expect(afterState.data.todos.todos.length).toBe(1)
+      expect(afterState.data.todos.todos[0].title).toBe(expectedTitle)
     })
     test('add five Todos and retrieve correct count of Todos', async () => {
       const expectedCount = 5
@@ -45,7 +45,7 @@ describe('Todos', () => {
         resolvers.Mutation)
 
       const beforeState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: 3 })
 
@@ -53,25 +53,25 @@ describe('Todos', () => {
         .catch(e => console.log('error: ', e))
 
       const afterState = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: expectedCount })
 
       const afterStateB = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 0, offset: expectedCountB })
 
       const afterStateC = await graphql(executableSchema,
-        'query { todos { title } }',
+        'query { todos { todos { title } } }',
         resolvers.Query,
         { first: 3, offset: 5 })
 
       expect(titles.length).toBe(expectedCount)
-      expect(beforeState.data.todos.length).toBe(0)
-      expect(afterState.data.todos.length).toBe(expectedCount)
-      expect(afterStateB.data.todos.length).toBe(expectedCountB)
-      expect(afterStateC.data.todos.length).toBe(expectedCountC)
+      expect(beforeState.data.todos.todos.length).toBe(0)
+      expect(afterState.data.todos.todos.length).toBe(expectedCount)
+      expect(afterStateB.data.todos.todos.length).toBe(expectedCountB)
+      expect(afterStateC.data.todos.todos.length).toBe(expectedCountC)
     })
   })
 })
