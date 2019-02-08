@@ -100,6 +100,12 @@ describe('Todos', () => {
         resolvers.Query,
         { first: 0 })
 
+      const a = await graphql(executableSchema,
+        'mutation { addTodoDoer }',
+        resolvers.Mutation,
+        { todoID: '0', doerID: '0' })
+
+      expect(typeof a).toBe('object')
       expect(doerA.data.doers[0].id).toBe('0')
       expect(doerA.data.doers[0].name).toBe(expectedName)
       expect(todoA.data.todos.todos.length).toBe(1)

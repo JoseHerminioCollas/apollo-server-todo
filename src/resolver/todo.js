@@ -29,12 +29,27 @@ const todo = (function createTodo() {
     todos.splice(0)
     return true
   }
+  function addTodoDoer(_, todoID, doerID, context) {
+    // console.log('xxx', todos)
+    // console.log('di: ', todoID, doerID)
+    // console.log('xx', context.rootValue)
+    /*
+      const doer = context.getDoer(doerID)
+      const todo = get(id)
+      todo.addDoer(doer)
+    */
+    // where do I get the doer from, if I just pass the ID????
+    // const td = doers[doerID]
+    // td.addDoer()
+    return true
+  }
   return {
     add,
     get,
     clearList,
     deleteTodo,
+    addTodoDoer,
   }
-}())
+}()) // pass in shared data?
 
 module.exports = todo
