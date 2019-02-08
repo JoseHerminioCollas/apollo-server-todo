@@ -1,4 +1,5 @@
-function Doer(name) {
+function Doer(id, name) {
+  this.id = id
   this.name = name
 }
 const doer = (() => {
@@ -6,7 +7,7 @@ const doer = (() => {
   return {
     get: () => doers,
     add(name) {
-      const d = new Doer(name)
+      const d = new Doer(doers.length, name)
       doers.push(d)
       return d
     },

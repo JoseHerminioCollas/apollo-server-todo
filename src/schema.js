@@ -25,6 +25,7 @@ type TodosResult {
     totalCount: Int
 }
 type Doer {
+    id: ID!
     name: String
 }
 `

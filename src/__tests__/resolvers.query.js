@@ -87,7 +87,7 @@ describe('Todos', () => {
         { name: expectedName })
 
       const doerA = await graphql(executableSchema,
-        'query { doers { name } }',
+        'query { doers { name, id } }',
         resolvers.Query)
       // add todo
       await graphql(executableSchema,
@@ -100,6 +100,7 @@ describe('Todos', () => {
         resolvers.Query,
         { first: 0 })
 
+      expect(doerA.data.doers[0].id).toBe('0')
       expect(doerA.data.doers[0].name).toBe(expectedName)
       expect(todoA.data.todos.todos.length).toBe(1)
     })
