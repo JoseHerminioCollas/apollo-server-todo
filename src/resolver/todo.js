@@ -45,7 +45,11 @@ const todo = (function createTodo() {
     // td.addDoer()
     return true
   }
-  function getTodos() {
+  function getTodos(_, { first = 0, offset = 2 }) {
+    return {
+      todos: todos.slice(first, first + offset),
+      totalCount: todos.length,
+    }
   }
   return {
     add,
