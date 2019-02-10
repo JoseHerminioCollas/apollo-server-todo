@@ -100,13 +100,13 @@ describe('Todos', () => {
         resolvers.Query,
         { first: 0 })
       const todoWDoer = await graphql(executableSchema,
-        'mutation { addTodoDoer { title, doers { name }} }',
+        'mutation B($todoID: String!, $doerID: String!){ addTodoDoer(todoID: $todoID, doerID: $doerID) { title, doers { name }} }',
         { addTodoDoer: resolvers.Mutation.addTodoDoer },
+        {},
         { todoID: '0', doerID: '0' })
 
       expect(doerA.data.doers[0].name).toBe(expectedName)
       expect(todoA.data.todos.todos.length).toBe(1)
-
       expect(todoWDoer.data.addTodoDoer.doers[0].name)
         .toBe(expectedName)
     })

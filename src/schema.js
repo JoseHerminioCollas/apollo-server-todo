@@ -7,7 +7,7 @@ type Query {
 }
 type Mutation {
     addTodo(title: String description: String): Todo
-    addTodoDoer(todoID: String, doerID: String): Todo
+    addTodoDoer(todoID: String!, doerID: String!): Todo
     deleteTodo(id: Int): Boolean
     setTodoComplete(id: String): Todo
     setTodoContent(id: String, title: String, description: String): Todo
