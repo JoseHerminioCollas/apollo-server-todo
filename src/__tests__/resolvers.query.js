@@ -82,8 +82,9 @@ describe('Todos', () => {
         resolvers.Mutation)
       // add doer
       await graphql(executableSchema,
-        'mutation { addDoer { name }}',
+        'mutation A($name: String!){ addDoer(name: $name) { name }}',
         resolvers.Mutation,
+        {},
         { name: expectedName })
       const doerA = await graphql(executableSchema,
         'query { doers { name, id } }',
@@ -92,6 +93,7 @@ describe('Todos', () => {
       await graphql(executableSchema,
         'mutation { addTodo { title } }',
         resolvers.Mutation,
+        {},
         { title: 'x' })
       const todoA = await graphql(executableSchema,
         'query { todos {todos { title } } }',

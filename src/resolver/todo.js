@@ -29,8 +29,8 @@ const createTodo = function createTodo(doer) {
     return true
   }
   async function addTodoDoer(todoID, doerID) {
-    const t = getTodo()
-    const d = doer.getDoer()
+    const t = getTodo(todoID)
+    const d = doer.getDoer(doerID)
     t.addDoer(d)
     return t
   }

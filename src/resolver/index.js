@@ -17,9 +17,8 @@ const resolvers = {
         { title = 'none', description = 'none' }) => todo.add(title, description),
     addTodoDoer:
       async (
-        prev,
-        { todoID, doerID },
-        context) => todo.addTodoDoer(prev, doerID, todoID, context),
+        _,
+        { todoID, doerID }) => todo.addTodoDoer(doerID, todoID),
     addDoer:
       async (
         _,
