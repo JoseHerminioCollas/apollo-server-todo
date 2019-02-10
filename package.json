@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
-    "test:watch": "jest --watch --verbose test --runInBand",
+    "test:watch": "jest --watch --verbose --runInBand",
     "start": "nodemon localhost 8888 src/index.js",
     "start:ci": "node src/index.js",
     "lint": "eslint src",

@@ -4,14 +4,16 @@ function Todo(id, title, description) {
   this.description = description
   this.doers = []
 }
-Todo.prototype.addDoer = (doer) => {
+Todo.prototype.addDoer = function addDoer(doer) {
   this.doers.push(doer)
   return doer
 }
 const todo = (function createTodo() {
   const todos = []
   function add(title, description = ' - ') {
-    todos.unshift(new Todo(todos.length, title, description))
+    const t = new Todo(todos.length, title, description)
+    t.addDoer({ id: 111, name: 'doername' })
+    todos.unshift(t)
     return todos[0]
   }
   const deleteTodo = (id) => {
@@ -19,7 +21,7 @@ const todo = (function createTodo() {
     todos.splice(tI, 1)
     return true
   }
-  function get(_, { first = 0, offset = 2 }) {
+  function getTodo(_, { first = 0, offset = 2 }) {
     return {
       todos: todos.slice(first, first + offset),
       totalCount: todos.length,
@@ -29,8 +31,8 @@ const todo = (function createTodo() {
     todos.splice(0)
     return true
   }
-  function addTodoDoer(_, todoID, doerID, context) {
-    // console.log('xxx', todos)
+  async function addTodoDoer() {
+  // async function addTodoDoer (_, todoID, doerID, context) {
     // console.log('di: ', todoID, doerID)
     // console.log('xx', context.rootValue)
     /*
@@ -43,9 +45,12 @@ const todo = (function createTodo() {
     // td.addDoer()
     return true
   }
+  function getTodos() {
+  }
   return {
     add,
-    get,
+    getTodo,
+    getTodos,
     clearList,
     deleteTodo,
     addTodoDoer,

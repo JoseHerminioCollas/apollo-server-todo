@@ -3,8 +3,10 @@ const todo = require('./todo')
 
 const resolvers = {
   Query: {
-    todos: todo.get,
-    doers: doer.get,
+    todos: todo.getTodos,
+    doers: doer.getDoers,
+    todo: todo.getTodo,
+    doer: doer.getDoer,
   },
   Mutation: {
     addTodo:
@@ -19,7 +21,7 @@ const resolvers = {
     addDoer:
       async (
         _,
-        { name = 'abc' }) => doer.add(name),
+        { name = 'abc' }) => doer.addDoer(name),
     clearTodoList: todo.clearList,
     deleteTodo:
       async (

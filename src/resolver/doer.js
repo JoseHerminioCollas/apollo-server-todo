@@ -4,13 +4,17 @@ function Doer(id, name) {
 }
 const doer = (() => {
   const doers = []
+  const getDoer = () => doers[0]
+  const getDoers = () => doers
+  const addDoer = (name) => {
+    const d = new Doer(doers.length, name)
+    doers.push(d)
+    return d
+  }
   return {
-    get: () => doers,
-    add(name) {
-      const d = new Doer(doers.length, name)
-      doers.push(d)
-      return d
-    },
+    getDoers,
+    getDoer,
+    addDoer,
   }
 })()
 

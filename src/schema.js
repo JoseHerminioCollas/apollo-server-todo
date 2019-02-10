@@ -2,6 +2,8 @@ const typeDefs = `
 type Query {
     todos(first: Int, offset: Int): TodosResult
     doers(first: Int, offset: Int): [Doer]
+    todo(ID: String): Todo
+    doer(ID: String): Doer
 }
 type Mutation {
     addTodo(title: String description: String): Todo
