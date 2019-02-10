@@ -8,11 +8,11 @@ Todo.prototype.addDoer = function addDoer(doer) {
   this.doers.push(doer)
   return doer
 }
-const todo = (function createTodo() {
+const createTodo = function createTodo(doer) {
+  if (!doer) throw new Error('must supply doers object')
   const todos = []
   function add(title, description = ' - ') {
     const t = new Todo(todos.length, title, description)
-    t.addDoer({ id: 111, name: 'doername' })
     todos.unshift(t)
     return todos[0]
   }
@@ -21,29 +21,18 @@ const todo = (function createTodo() {
     todos.splice(tI, 1)
     return true
   }
-  function getTodo(_, { first = 0, offset = 2 }) {
-    return {
-      todos: todos.slice(first, first + offset),
-      totalCount: todos.length,
-    }
+  function getTodo() {
+    return todos[0]
   }
   function clearList() {
     todos.splice(0)
     return true
   }
-  async function addTodoDoer() {
-  // async function addTodoDoer (_, todoID, doerID, context) {
-    // console.log('di: ', todoID, doerID)
-    // console.log('xx', context.rootValue)
-    /*
-      const doer = context.getDoer(doerID)
-      const todo = get(id)
-      todo.addDoer(doer)
-    */
-    // where do I get the doer from, if I just pass the ID????
-    // const td = doers[doerID]
-    // td.addDoer()
-    return true
+  async function addTodoDoer(todoID, doerID) {
+    const t = getTodo()
+    const d = doer.getDoer()
+    t.addDoer(d)
+    return t
   }
   function getTodos(_, { first = 0, offset = 2 }) {
     return {
@@ -59,6 +48,6 @@ const todo = (function createTodo() {
     deleteTodo,
     addTodoDoer,
   }
-}()) // pass in shared data?
+} // pass in shared data?
 
-module.exports = todo
+module.exports = createTodo

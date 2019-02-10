@@ -1,5 +1,7 @@
 const doer = require('./doer') // Doer
-const todo = require('./todo')
+const createTodo = require('./todo')
+
+const todo = createTodo(doer)
 
 const resolvers = {
   Query: {

@@ -97,21 +97,16 @@ describe('Todos', () => {
         'query { todos {todos { title } } }',
         resolvers.Query,
         { first: 0 })
-      // add Todo Doer
-      const a = await graphql(executableSchema,
-        'mutation { addTodoDoer }',
-        resolvers.Mutation,
+      const todoWDoer = await graphql(executableSchema,
+        'mutation { addTodoDoer { title, doers { name }} }',
+        { addTodoDoer: resolvers.Mutation.addTodoDoer },
         { todoID: '0', doerID: '0' })
-      const todoB = await graphql(executableSchema,
-        'query { todos {todos { title, doers { name } } } }',
-        resolvers.Query,
-        { first: 0 })
 
-      expect(todoB.data.todos.todos[0].doers.length).toBe(1)
-      expect(typeof a).toBe('object')
-      expect(doerA.data.doers[0].id).toBe('0')
       expect(doerA.data.doers[0].name).toBe(expectedName)
       expect(todoA.data.todos.todos.length).toBe(1)
+
+      expect(todoWDoer.data.addTodoDoer.doers[0].name)
+        .toBe(expectedName)
     })
   })
 })
