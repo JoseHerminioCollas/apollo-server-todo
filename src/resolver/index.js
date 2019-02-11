@@ -20,7 +20,9 @@ const resolvers = {
         _,
         { todoID, doerID }) => todo.addTodoDoer(doerID, todoID),
     addDoer:
-      async ({ name }) => doer.addDoer(name),
+      async (
+        _,
+        { name }) => doer.addDoer(name),
     clearTodoList: todo.clearList,
     deleteTodo:
       async (
