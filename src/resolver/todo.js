@@ -13,7 +13,7 @@ const todo = (model) => {
     model.todos.splice(tI, 1)
     return true
   }
-  function get(_, { first = 0, offset = 2 }) {
+  function get(_, { first = 0, offset = 20 }) {
     return {
       todos: model.todos.slice(first, first + offset),
       totalCount: model.todos.length,

@@ -1,8 +1,6 @@
-const model = {todos: [{id: 3333333333, completed: true}]}
+const model = {todos: []}
 const doer = require('./doer')(model)
 const todo = require('./todo')(model)
-
-model.todos.push({id: 33, completed: true})
 
 const resolvers = {
   Query: {

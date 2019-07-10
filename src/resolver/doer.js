@@ -3,10 +3,12 @@ function Doer(name) {
 }
 const doer = (model) => {
   const doers = []
+  const todoIds = [0]
   doers.push({ name: 'you' }, { name: 'me' })
+
   return {
     get: () => doers,
-    getTodos: () => model.todos,
+    getTodos: () => model.todos.filter(e => todoIds.includes(e.id) ),
     add(name) {
       const d = new Doer(name)
       doers.push(d)
