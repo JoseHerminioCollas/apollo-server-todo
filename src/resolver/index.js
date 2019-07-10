@@ -1,10 +1,12 @@
-const doer = require('./doer')
+const model = {todos: [{id: 3, completed: true}]}
+const doer = require('./doer')(model)
 const todo = require('./todo')
 
 const resolvers = {
   Query: {
     todos: todo.get,
     doers: doer.get,
+    doersTodos: doer.getTodos,
   },
   Mutation: {
     addTodo:
