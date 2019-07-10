@@ -3,6 +3,7 @@ type Query {
     todos(first: Int, offset: Int): TodosResult
     doers(first: Int, offset: Int): [Doer]
     doersTodos: [Todo]
+    getDoerAll: String
 }
 type Mutation {
     addTodo(title: String description: String): Todo

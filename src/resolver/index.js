@@ -7,6 +7,7 @@ const resolvers = {
     todos: todo.get,
     doers: doer.get,
     doersTodos: doer.getTodos,
+    getDoerAll: doer.getDoerAll,
   },
   Mutation: {
     addTodo:
