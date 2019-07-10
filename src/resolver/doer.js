@@ -2,9 +2,8 @@ function Doer(name) {
   this.name = name
 }
 const doer = (model) => {
-  const doers = [{ name: 'me' }]
-  doers.push({ name: 'you' })
-  const todos = [{ id: 23, title: 'title three' }]
+  const doers = []
+  doers.push({ name: 'you' }, { name: 'me' })
   return {
     get: () => doers,
     getTodos: () => model.todos,

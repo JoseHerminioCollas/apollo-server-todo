@@ -3,25 +3,24 @@ function Todo(id, title, description) {
   this.title = title
   this.description = description
 }
-const todo = (function createTodo() {
-  const todos = []
+const todo = (model) => {
   function add(title, description = ' - ') {
-    todos.unshift(new Todo(todos.length, title, description))
-    return todos[0]
+    model.todos.unshift(new Todo(model.todos.length, title, description))
+    return model.todos[0]
   }
   const deleteTodo = (id) => {
-    const tI = todos.findIndex(t => t.id === id)
-    todos.splice(tI, 1)
+    const tI = model.todos.findIndex(t => t.id === id)
+    model.todos.splice(tI, 1)
     return true
   }
   function get(_, { first = 0, offset = 2 }) {
     return {
-      todos: todos.slice(first, first + offset),
-      totalCount: todos.length,
+      todos: model.todos.slice(first, first + offset),
+      totalCount: model.todos.length,
     }
   }
   function clearList() {
-    todos.splice(0)
+    model.todos.splice(0)
     return true
   }
   return {
@@ -30,6 +29,6 @@ const todo = (function createTodo() {
     clearList,
     deleteTodo,
   }
-}())
+}
 
 module.exports = todo
