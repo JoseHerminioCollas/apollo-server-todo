@@ -1,17 +1,18 @@
 function Doer(name) {
   this.name = name
+  this.todos = []
 }
 const doer = (model) => {
   const doers = []
-  const todoIds = [0, 1]
-  doers.push({ name: 'you' }, { name: 'me' })
-  function getOwnTodos() {
-    return model.todos.filter(e => todoIds.includes(e.id))
+
+  doers.push({ name: 'you' , todos: [model.todos[0]]}, { name: 'me', todos: [] })
+
+  function getOwnTodos(doerId) {
+    return model.todos.filter(e => 1 === e.id)
   }
   return {
     get: () => doers,
     getTodos: () => getOwnTodos(),
-    getDoerAll: () => ({ name: 'xxx', todos: getOwnTodos() }),
     add(name) {
       const d = new Doer(name)
       doers.push(d)
