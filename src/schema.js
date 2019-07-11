@@ -17,13 +17,15 @@ type Todo {
     title: String
     description: String
     completed: Boolean!
+    doerIds: [Int]
+    doers: [Doer]
 }
 type TodosResult {
     todos: [Todo]
-    doers: [Doer]
     totalCount: Int
 }
 type Doer {
+    id: ID!
     name: String
     todos: [Todo]
 }
