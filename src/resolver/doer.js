@@ -12,7 +12,6 @@ const doer = (model) => {
   }
   return {
     get: () => doers,
-    getTodos: () => getOwnTodos(),
     add(name) {
       const d = new Doer(name)
       doers.push(d)

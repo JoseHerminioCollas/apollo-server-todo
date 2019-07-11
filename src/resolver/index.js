@@ -6,7 +6,6 @@ const resolvers = {
   Query: {
     todos: todo.get,
     doers: doer.get,
-    doersTodos: doer.getTodos,
   },
   Mutation: {
     addTodo:
