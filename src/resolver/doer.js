@@ -17,8 +17,9 @@ const doer = (model) => {
       const todosArg = []
       for (let i = 0; i < todoIds.length; i++) {
         const todo = getTodo(todoIds[i])
-        // todo.doerIds.push(todoIds[i])
-        todosArg.push(toddo)
+        // console.log(todoIds[i])
+        todo.doerIds.push(count)
+        todosArg.push(todo)
       }
       const doer = new Doer(name, todosArg, todoIds,  count++)
       model.doers.push(doer)

@@ -2,7 +2,7 @@ function Todo(id, title, description) {
   this.id = id
   this.title = title
   this.description = description
-  this.doerIds = [1]
+  this.doerIds = []
   this.doers = []
 }
 const todo = (model) => {

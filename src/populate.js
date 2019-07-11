@@ -6,7 +6,6 @@ function populate() {
   for (let i = 0; i < 3; i += 1) {
     const t = `title ${i}`
     resolvers.Mutation.addTodo(null, { id: i, title: t })
-    //    console.log(i)
   }
 }
 
