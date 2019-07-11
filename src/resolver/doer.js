@@ -14,9 +14,13 @@ const doer = (model) => {
   return {
     get: () => doers,
     add(name, todoIds) {
-      console.log(todoIds)
       // get the todos from the model and populate
-      const d = new Doer(name, null, todoIds)
+      const todosArg = []
+      for (let i = 0; i < todoIds.length; i++) {
+        const a = model.todos.filter(td => todoIds[i] === td.id)
+        todosArg.push(...a)
+      }
+      const d = new Doer(name, todosArg, todoIds)
       doers.push(d)
       return d
     },
