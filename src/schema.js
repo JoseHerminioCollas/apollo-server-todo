@@ -25,7 +25,6 @@ type TodosResult {
 type Doer {
     name: String
     todos: [Todo]
-    todoIds: [Int]
 }
 `
 module.exports = typeDefs

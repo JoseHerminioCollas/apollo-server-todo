@@ -5,11 +5,10 @@ function Doer(name, todos = [], todoIds = []) {
 }
 const doer = (model) => {
   const doers = []
-  doers.push({ name: 'you' , todos: [model.todos[0]]}, { name: 'me', todos: [] })
   function getTodo(todoId) {
     return  model.todos.filter(td => todoId === td.id)
   }
-  
+
   return {
     get: () => doers,
     add(name, todoIds) {

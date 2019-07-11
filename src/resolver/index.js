@@ -1,4 +1,4 @@
-const model = {todos: [{id: 100, title: '100th'}]}
+const model = {todos: []}
 const doer = require('./doer')(model)
 const todo = require('./todo')(model)
 
