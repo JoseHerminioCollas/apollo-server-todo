@@ -20,6 +20,7 @@ type Todo {
 }
 type TodosResult {
     todos: [Todo]
+    doers: [Doer]
     totalCount: Int
 }
 type Doer {

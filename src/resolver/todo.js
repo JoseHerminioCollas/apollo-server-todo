@@ -15,6 +15,7 @@ const todo = (model) => {
   }
   function get(_, { first = 0, offset = 20 }) {
     return {
+      doers: model.doers,
       todos: model.todos.slice(first, first + offset),
       totalCount: model.todos.length,
     }
