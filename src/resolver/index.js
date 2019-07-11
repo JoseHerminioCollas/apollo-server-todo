@@ -1,4 +1,7 @@
-const model = {todos: []}
+const model = {
+  todos: [],
+  doers: [],
+}
 const doer = require('./doer')(model)
 const todo = require('./todo')(model)
 
