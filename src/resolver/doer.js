@@ -1,6 +1,7 @@
-function Doer(name) {
+function Doer(name, todos = [], todoIds = []) {
   this.name = name
-  this.todos = []
+  this.todos = todos
+  this.todoIds = todoIds
 }
 const doer = (model) => {
   const doers = []
@@ -12,8 +13,10 @@ const doer = (model) => {
   }
   return {
     get: () => doers,
-    add(name) {
-      const d = new Doer(name)
+    add(name, todoIds) {
+      console.log(todoIds)
+      // get the todos from the model and populate
+      const d = new Doer(name, null, todoIds)
       doers.push(d)
       return d
     },

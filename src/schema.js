@@ -9,7 +9,7 @@ type Mutation {
     setTodoComplete(id: String): Todo
     setTodoContent(id: String, title: String, description: String): Todo
     clearTodoList: Boolean
-    addDoer(name: String): Doer
+    addDoer(name: String, todoIds: [Int]): Doer
     deleteDoer(id: String): Doer
 }
 type Todo {
@@ -25,6 +25,7 @@ type TodosResult {
 type Doer {
     name: String
     todos: [Todo]
+    todoIds: [Int]
 }
 `
 module.exports = typeDefs
